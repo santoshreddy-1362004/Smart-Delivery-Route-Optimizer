@@ -2,6 +2,38 @@
 
 A full-stack web application that solves the **Traveling Salesman Problem (TSP)** using the **Held-Karp Dynamic Programming algorithm**. Built with **React** frontend and **Node.js/Express** backend, designed to work completely offline without any external APIs.
 
+## ⚡ Quick Start
+
+### For Local Development (Recommended)
+
+```bash
+# 1. Clone/navigate to project
+cd Smart-Delivery-Route-Optimizer
+
+# 2. Start Backend (Terminal 1)
+cd backend
+npm install
+npm start
+# ✅ Backend runs on http://localhost:5000
+
+# 3. Start Frontend (Terminal 2)  
+cd frontend
+npm install
+npm start
+# ✅ Frontend runs on http://localhost:3000
+
+# 4. Open http://localhost:3000 in your browser
+```
+
+### For Production Deployment (Vercel)
+
+```bash
+npm i -g vercel
+vercel login
+vercel
+# ✅ Deploys to https://your-app.vercel.app
+```
+
 ## ✨ Features
 
 ### Backend
@@ -18,64 +50,151 @@ A full-stack web application that solves the **Traveling Salesman Problem (TSP)*
 - **Sample Data**: Pre-loaded examples for quick testing
 - **Responsive Design**: Works on desktop and mobile
 - **Loading States**: Visual feedback during optimization
+- ✅ Check CORS settings in `backend/server.js`
+- ✅ Verify proxy configuration in `frontend/package.json`
+- ✅ Check network tab in browser dev tools
+
+**Matrix Input Issues:**
+- ✅ Ensure diagonal elements are 0
+- ✅ Matrix must be square (n×n)
+- ✅ All values must be non-negative numbers
+- ✅ Maximum size is 15×15 for performance
+
+**Build Issues:**
+```bash
+# Clear node_modules and reinstall
+rm -rf node_modules package-lock.json
+npm install
+
+# For root-level React app
+npm run build
+```
+
+**Vercel Deployment Issues:**
+- ✅ Check function logs: `vercel logs [url]`
+- ✅ Verify API routes start with `/api/`
+- ✅ Ensure `api/package.json` has correct dependencies
+- ✅ Test locally with `vercel dev`
+
+## 🏆 Performance Notes
+
+- **Algorithm Limits**: TSP is NP-hard; practical limit ~15 cities
+- **Memory Usage**: O(n × 2ⁿ) space complexity requires careful memory management
+- **Response Time**: Sub-second response for matrices up to 10×10
+- **Browser Compatibility**: Modern browsers with Canvas support
+
+## 🚀 Deployment*Held-Karp Algorithm**: Exact TSP solution with O(n² × 2ⁿ) complexity
+- **REST API**: Clean `/optimize-route` endpoint
+- **Input Validation**: Comprehensive matrix validation
+- **Error Handling**: Robust error handling and meaningful messages
+- **Performance Limits**: Supports up to 15 cities for reasonable response times
+
+### Frontend
+- **Interactive Matrix Input**: Dynamic distance matrix entry
+- **Real-time Validation**: Input validation with helpful feedback
+- **Route Visualization**: Canvas-based visual representation
+- **Sample Data**: Pre-loaded examples for quick testing
+- **Responsive Design**: Works on desktop and mobile
+- **Loading States**: Visual feedback during optimization
 
 ## 🏗️ Project Structure
 
+### Current Structure (Vercel-Ready)
 ```
 Smart-Delivery-Route-Optimizer/
-├── backend/                    # Node.js + Express API
-│   ├── server.js              # Main server file
-│   ├── tspSolver.js           # Held-Karp TSP algorithm implementation
-│   ├── package.json           # Backend dependencies
-│   ├── tests/                 # Unit tests
-│   └── README.md              # Backend documentation
-├── frontend/                   # React frontend
-│   ├── src/
-│   │   ├── App.js            # Main application component
-│   │   ├── components/       # React components
-│   │   │   ├── MatrixInput.js # Distance matrix input
-│   │   │   ├── RouteResult.js # Results display
-│   │   │   └── RouteVisualizer.js # Route visualization
-│   │   └── index.js          # React entry point
-│   ├── public/               # Static files
-│   ├── package.json          # Frontend dependencies
-│   └── README.md             # Frontend documentation
-└── README.md                 # This file
+├── src/                        # React frontend components (root level)
+│   ├── App.js                 # Main application component  
+│   ├── components/            # React components
+│   │   ├── MatrixInput.js     # Distance matrix input
+│   │   ├── RouteResult.js     # Results display
+│   │   └── RouteVisualizer.js # Route visualization
+│   └── index.js               # React entry point
+├── public/                     # Static files (root level)
+│   └── index.html             # Main HTML file
+├── package.json                # React app dependencies (root level)
+├── api/                        # Vercel serverless functions
+│   ├── optimize-route.js      # TSP solver API endpoint
+│   ├── health.js              # Health check endpoint
+│   ├── tspSolver.js           # TSP algorithm implementation
+│   └── package.json           # API dependencies
+├── backend/                    # Original backend (for local dev)
+│   ├── server.js              # Express server
+│   ├── tspSolver.js           # TSP algorithm
+│   └── package.json           # Backend dependencies
+├── frontend/                   # Original frontend (reference)
+├── vercel.json                 # Vercel deployment config
+├── .vercelignore              # Deployment ignore file
+├── DEPLOYMENT.md              # Deployment instructions
+└── README.md                  # This file
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v14 or higher)
-- npm (v6 or higher)
+- **Node.js** (v16 or higher)
+- **npm** (v7 or higher)
 
-### Installation & Setup
+### Local Development Options
 
-1. **Clone or navigate to the project directory**
+#### Option 1: Full-Stack Development (Recommended)
 
-2. **Backend Setup:**
+**Backend Setup (Terminal 1):**
 ```bash
 cd backend
 npm install
 npm start
 ```
-The backend will run on `http://localhost:5000`
+✅ Backend runs on `http://localhost:5000`
 
-3. **Frontend Setup (in a new terminal):**
+**Frontend Setup (Terminal 2):**
 ```bash
 cd frontend
 npm install
 npm start
 ```
-The frontend will run on `http://localhost:3000`
+✅ Frontend runs on `http://localhost:3000`
 
-4. **Access the application:**
-Open your browser and go to `http://localhost:3000`
+**Access:** Open `http://localhost:3000` in your browser
+
+#### Option 2: Root-Level React Development
+
+If you want to run the React app from the project root:
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+```
+✅ App runs on `http://localhost:3000`
+
+*Note: You'll need to run the backend separately for API functionality*
+
+#### Option 3: Vercel Development (Production Simulation)
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Login (first time only)
+vercel login
+
+# Start local development server
+vercel dev
+```
+✅ Full app with serverless functions on `http://localhost:3000`
 
 ## 📊 Usage Example
 
-### API Testing
-You can test the backend API directly:
+### Web Interface
+1. Open the application in your browser
+2. Enter a distance matrix or use sample data
+3. Click "Optimize Route" 
+4. View the optimal route and visualization
+
+### API Testing (Backend)
+Test the backend API directly:
 
 ```bash
 curl -X POST http://localhost:5000/optimize-route \
@@ -130,13 +249,16 @@ The implementation uses the Held-Karp algorithm, which:
 
 ## 🧪 Testing
 
-### Backend Tests
+### Automated Tests
 ```bash
+# Backend unit tests
 cd backend
 npm test
 ```
 
-### Manual Testing
+### Manual Testing Examples
+
+**API Testing (if running backend locally):**
 1. **Small Instance (3 cities)**:
    ```
    [0, 2, 9]
@@ -175,16 +297,45 @@ npm test
 - Route paths with direction arrows
 - Color-coded legend
 
-## 🔧 Configuration
+## 🔧 Configuration & Setup
 
-### Backend Configuration
-- **Port**: 5000 (configurable via PORT environment variable)
-- **CORS**: Enabled for frontend communication
+### Development Environment
+
+**Backend Configuration:**
+- **Port**: 5000 (configurable via `PORT` environment variable)
+- **CORS**: Enabled for frontend communication  
 - **Body Limit**: 10MB for large matrices
+- **Hot Reload**: `nodemon` for development
 
-### Frontend Configuration
-- **Proxy**: Configured to proxy API requests to backend
-- **Build**: Optimized production build available
+**Frontend Configuration:**
+- **Development Port**: 3000
+- **Proxy**: Configured to proxy API requests to backend (in `frontend/`)
+- **Build Output**: `build/` directory for production
+- **Hot Reload**: React development server
+
+**Root-Level React App:**
+- **Port**: 3000 (when run from project root)
+- **API Endpoints**: Configured for both development and production
+- **Build**: Same React build process
+
+### Production (Vercel)
+
+**Serverless Functions:**
+- **API Routes**: `/api/optimize-route`, `/api/health`
+- **Runtime**: Node.js 18.x
+- **CORS**: Configured for all origins
+- **Timeout**: 10 seconds (Hobby plan)
+
+**Static Files:**
+- **React Build**: Served from root
+- **CDN**: Global edge network
+- **Routing**: Handled by `vercel.json`
+
+### File Structure Notes
+
+- **Original Structure**: `frontend/` and `backend/` directories (preserved)
+- **Vercel Structure**: Root-level React app with `api/` functions
+- **Flexible**: Both structures work depending on development preference
 
 ## 🌟 Key Features Implemented
 
@@ -198,10 +349,12 @@ npm test
 ✅ **Error Handling**: User-friendly error messages  
 ✅ **Performance Limits**: Reasonable limits for web usage  
 ✅ **No External APIs**: Works completely offline  
+✅ **Vercel Deploy**: Production-ready serverless deployment
+✅ **MIT License**: Open source with permissive license
 
 ## 📝 API Documentation
 
-### POST /optimize-route
+### POST /optimize-route (or /api/optimize-route in production)
 
 **Request Body:**
 ```json
