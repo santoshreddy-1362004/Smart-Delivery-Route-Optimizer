@@ -32,12 +32,17 @@ Your Smart Delivery Route Optimizer is now ready for Vercel deployment!
    npm i -g vercel
    ```
 
-2. **Deploy**:
+2. **Login to Vercel** (if not already logged in):
+   ```bash
+   vercel login
+   ```
+
+3. **Deploy**:
    ```bash
    vercel
    ```
 
-3. **Test your deployed app**:
+4. **Test your deployed app**:
    - Frontend: `https://your-app.vercel.app`
    - API health: `https://your-app.vercel.app/api/health`
    - TSP solver: Use the web interface

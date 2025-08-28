@@ -1,4 +1,4 @@
-const TSPSolver = require('../backend/tspSolver');
+import TSPSolver from './tspSolver.js';
 
 export default async function handler(req, res) {
   // Enable CORS
