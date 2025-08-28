@@ -253,9 +253,38 @@ Health check endpoint returning server status.
 - **Response Time**: Sub-second response for matrices up to 10×10
 - **Browser Compatibility**: Modern browsers with Canvas support
 
+## � Deployment
+
+### Vercel (Recommended)
+
+This project is configured for easy deployment on Vercel:
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy from project root
+vercel
+```
+
+The project includes:
+- Pre-configured `vercel.json` for routing
+- Serverless API functions in `/api/` directory  
+- Optimized React build configuration
+- CORS handling for production
+
+For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
+
+### Other Platforms
+
+The app can also be deployed on:
+- **Netlify**: Upload `build/` folder + configure redirects for API
+- **Heroku**: Deploy backend separately, configure frontend API URLs
+- **AWS/GCP**: Use serverless functions + static hosting
+
 ## 📄 License
 
-This project is available for educational and demonstration purposes.
+MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
